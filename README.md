@@ -118,6 +118,8 @@ The basic logic gates — AND, OR, and NOT — were realized using Verilog HDL:
 Y_AND = A.B
 Y_OR = A+B
 Y_NOT = A'
+<img width="911" height="612" alt="WhatsApp Image 2026-10-22 at 11 51 12 AM" src="https://github.com/user-attachments/assets/b1881967-a293-46d9-a8b4-0a174213e954" />
+
 The design was compiled and simulated using Synopsys VCS, and the functionality was verified using DVE waveform analysis, matching the expected truth table.
 Output
 # OUTPUT
