@@ -8,12 +8,13 @@ To design, implement, and verify the functionality of basic AND, OR, and NOT log
 •	Linux Terminal
 •	Verilog HDL
 # Boolean Function
-The basic logic gates realize the following Boolean functions:
-
-•	AND: Y_AND = A . B
-•	OR: Y_OR = A + B
-•	NOT: Y_NOT = A'
-
+The basic logic gates — AND, NAND, OR, NOR, XOR and NOT — were realized using Verilog HDL:
+Y_AND = A.B
+Y_NAND = ~(A.B)
+Y_OR = A+B
+Y_NOR = ~(A+B)
+Y_XOR = A^B
+Y_NOT = A'
 # Theory / Synopsis
 Logic gates are the basic building blocks of digital systems. NAND and NOR are universal gates. XOR produces 1 when its inputs differ, while XNOR produces 1 when its inputs are equal.
 # Files to be Created
@@ -25,27 +26,38 @@ module basic_gates (
     input  wire a,
     input  wire b,
     output wire y_and,
+    output wire y_nand,
     output wire y_or,
+    output wire y_nor,
+    output wire y_xor,
     output wire y_not
 );
 
     assign y_and = a & b;   // AND gate
+    assign y_nand = ~(a & b);
     assign y_or  = a | b;   // OR gate
+    assign y_nor = ~(a |b);
+    assign y_xor = a ^ b;
     assign y_not = ~a;      // NOT gate (inverter)
-
+    
+    
 endmodule
 # **Test Bench Program**
+
 module tb2;
 
     reg a, b;
-    wire y_and, y_or, y_not;
+    wire y_and, y_nand, y_or, y_nor, y_xor, y_not;
 
     // Instantiate the design under test (DUT)
     basic_gates uut (
         .a(a),
         .b(b),
         .y_and(y_and),
+        .y_nand(y_nand),
         .y_or(y_or),
+        .y_nor(y_nor),
+        .y_xor(y_xor),
         .y_not(y_not)
     );
 
@@ -55,7 +67,7 @@ module tb2;
         $dumpvars(0, tb2);               // dump all signals in this testbench hierarchy
 
         // ---- Apply all 4 input combinations ----
-        $monitor("Time=%0t a=%b b=%b | AND=%b OR=%b NOT(a)=%b", $time, a, b, y_and, y_or, y_not);
+        $monitor("Time=%0t a=%b b=%b | AND=%b NAND=%b OR=%b NOR=%b XNOR=%b NOT(a)=%b", $time, a, b, y_and, y_nand, y_or, y_nor, y_xor, y_not);
 
         a = 0; b = 0; #10;
         a = 0; b = 1; #10;
@@ -68,10 +80,10 @@ module tb2;
 
 endmodule
 
-
+<img width="727" height="257" alt="WhatsApp Image 2026-10-24 at 1 28 57 PM" src="https://github.com/user-attachments/assets/ef8951ef-9b0e-4fcf-827e-513c0bd95dd8" />
 
  
-<img width="940" height="318" alt="image" src="https://github.com/user-attachments/assets/8a343bdb-ffb4-4aac-8b88-cf59eca374a8" />
+
 
 # Simulation Procedure
 STEP 1 – Open Terminal
@@ -124,7 +136,9 @@ The design was compiled and simulated using Synopsys VCS, and the functionality 
 Output
 # OUTPUT
 
-<img width="1837" height="1008" alt="Screenshot 2026-10-14 125033" src="https://github.com/user-attachments/assets/ed425145-c6fc-4b54-8dd5-cf6a54325d2e" />
+<img width="1600" height="900" alt="WhatsApp Image 2026-10-23 at 7 14 29 PM" src="https://github.com/user-attachments/assets/5470a10e-9f75-499e-a461-7282113f0c04" />
+
+
 
  
 # Viva-Voce Questions
